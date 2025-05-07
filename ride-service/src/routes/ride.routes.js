@@ -12,9 +12,14 @@ router.get('/:id', rideController.getRideById);
 router.put('/:id', rideController.updateRide);
 // Delete Ride
 router.delete('/:id', rideController.deleteRide);
+// Get Rides by Customer 
+router.get('/customer/:customerId', rideController.getRidesByCustomer);
+// Get Rides by Driver
+router.get('/driver/:driverId', rideController.getRidesByDriver);
+// Get Ride Statistics
+router.get('/stats/location', rideController.getRideStatistics);
 
-// Customer rates driver
-router.put('/rides/:id/rate/driver', rateDriver);
-
+// Find Nearby Drivers
+router.get('/nearby-drivers', rideController.findNearbyDrivers);
 
 module.exports = router; 
