@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  customer-service:
+    build:
+      context: ./services/customer-service
+    container_name: customer-service
+    ports:
+      - "3012:3012"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/uber
+    depends_on:
+      - mongodb
+    volumes:
+      - ./services/customer-service:/app
+    command: npm run dev
+
+volumes:
+  mongo_data:
